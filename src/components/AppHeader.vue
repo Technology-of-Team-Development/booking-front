@@ -2,6 +2,7 @@
 import { Bell } from 'lucide-vue-next'
 import AuthLogin from '@/components/auth/AuthLogin.vue'
 import { DialogTrigger } from '@/components/ui/dialog'
+import { useGlobalState } from '@/store/global'
 
 const date = new Date()
 const options: Intl.DateTimeFormatOptions = {
@@ -11,6 +12,10 @@ const options: Intl.DateTimeFormatOptions = {
 
 const month = date.toLocaleString('ru-Ru', options)
 const year = date.getFullYear()
+
+const globalState = useGlobalState()
+
+const user = globalState.currentUser
 </script>
 
 <template>
@@ -28,7 +33,10 @@ const year = date.getFullYear()
         <Bell />
       </div>
 
-      <AuthLogin>
+      <div v-if="user">
+        <span>{{ user.fullname }}</span>
+      </div>
+      <AuthLogin v-else>
         <DialogTrigger>
           <button class="hover:text-neutral-600">Войти</button>
         </DialogTrigger>
