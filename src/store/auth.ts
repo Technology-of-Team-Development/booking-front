@@ -39,5 +39,22 @@ export const useAuthStore = createGlobalState(() => {
     return response
   }
 
-  return { checkUser }
+  function changePassword(email: string, newPass: string) {
+    const response: MyResponse = {
+      error: false,
+      message: 'Вы успешно вошли!',
+    }
+
+    const userIdx = isUserExist(email)
+    if (userIdx === -1) {
+      response.error = true
+      response.message = 'Нет пользователя с такой почтой!'
+
+      return response
+    }
+
+    availableUsers.value[userIdx].password = newPass
+  }
+
+  return { checkUser, changePassword }
 })

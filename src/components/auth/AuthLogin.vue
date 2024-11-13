@@ -12,6 +12,8 @@ import { Eye, EyeOff } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/auth'
 
+const state = ref<'login' | 'recover'>('login')
+
 const showPassword = ref(false)
 
 const email = ref<string>('')
@@ -56,22 +58,28 @@ function login() {
           type="text"
           v-model="email"
         />
-        <div class="relative flex mb-16">
-          <Input
-            class="bg-neutral-100 text-xl"
-            placeholder="Введите пароль"
-            :type="showPassword ? 'text' : 'password'"
-            v-model="password"
-          />
-          <span
-            class="absolute right-0 flex items-center h-full pr-2 cursor-pointer"
-            @click="() => (showPassword = !showPassword)"
-          >
-            <Eye v-if="!showPassword" class="text-muted-foreground" />
-            <EyeOff v-else class="text-muted-foreground" />
-          </span>
+
+        <div class="flex flex-col mb-16">
+          <div class="relative flex mb-4">
+            <Input
+              class="bg-neutral-100 text-xl"
+              placeholder="Введите пароль"
+              :type="showPassword ? 'text' : 'password'"
+              v-model="password"
+            />
+            <span
+              class="absolute right-0 flex items-center h-full pr-2 cursor-pointer"
+              @click="() => (showPassword = !showPassword)"
+            >
+              <Eye v-if="!showPassword" class="text-muted-foreground" />
+              <EyeOff v-else class="text-muted-foreground" />
+            </span>
+          </div>
+
+          <button class="self-end">Забыли пароль?</button>
         </div>
       </form>
+
       <DialogFooter>
         <Button @click="login" class="w-full text-xl py-8">Войти</Button>
       </DialogFooter>
