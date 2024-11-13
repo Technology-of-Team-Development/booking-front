@@ -23,6 +23,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        'chair-free': '#15A696',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

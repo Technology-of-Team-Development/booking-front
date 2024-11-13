@@ -9,8 +9,10 @@ import Header from '@/components/AppHeader.vue'
     <AppSidebar />
     <div class="flex flex-col flex-grow">
       <Header />
-      <main class="flex place-center justify-center bg-neutral-200 flex-1">
-        <slot />
+      <main class="bg-neutral-200 flex-1">
+        <div class="px-4 py-6">
+          <slot />
+        </div>
       </main>
     </div>
   </SidebarProvider>
