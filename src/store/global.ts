@@ -2,9 +2,15 @@ import { createGlobalState } from '@vueuse/core'
 import { ref } from 'vue'
 
 export const useGlobalState = createGlobalState(() => {
-  const currentPage = ref<AvailablePagesNames>('map')
-  function changePage(newPage: AvailablePagesNames) {
-    currentPage.value = newPage
+  const isAuthModalOpen = ref(false)
+  const isAuthLogin = ref(false)
+
+  function changeAuthModalState() {
+    isAuthModalOpen.value = !isAuthModalOpen.value
+  }
+
+  function changeAuthState() {
+    isAuthLogin.value = !isAuthLogin.value
   }
 
   const currentUser = ref<User | null>(null)
@@ -156,9 +162,16 @@ export const useGlobalState = createGlobalState(() => {
     currentUser.value = user
   }
 
+  function removeCurrentUser() {
+    currentUser.value = null
+  }
+
   return {
-    currentPage,
-    changePage,
+    isAuthLogin,
+    changeAuthState,
+    isAuthModalOpen,
+    changeAuthModalState,
+    removeCurrentUser,
     currentUser,
     setCurrentUser,
 
