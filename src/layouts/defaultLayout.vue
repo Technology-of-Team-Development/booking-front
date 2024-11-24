@@ -10,7 +10,7 @@ import Header from '@/components/AppHeader.vue'
     <div class="flex flex-col flex-grow">
       <Header />
       <main class="bg-neutral-200 flex-1">
-        <div class="px-4 py-6">
+        <div class="px-4 py-6 h-full">
           <slot />
         </div>
       </main>
