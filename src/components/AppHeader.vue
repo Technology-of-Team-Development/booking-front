@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { Bell } from 'lucide-vue-next'
-import AuthLogin from '@/components/auth/AuthLogin.vue'
 import { DialogTrigger } from '@/components/ui/dialog'
 import { useGlobalState } from '@/store/global'
+import AuthModal from '@/components/auth/AuthModal.vue'
+import ProfileModal from '@/profile/ProfileModal.vue'
 
 const date = new Date()
 const options: Intl.DateTimeFormatOptions = {
@@ -33,14 +34,22 @@ const user = globalState.currentUser
         <Bell />
       </div>
 
-      <div v-if="user">
-        <span>{{ user.fullname }}</span>
-      </div>
-      <AuthLogin v-else>
+      <ProfileModal :user="user" v-if="user">
         <DialogTrigger>
-          <button class="hover:text-neutral-600">Войти</button>
+          <span>{{ user.firstName + ' ' + user.lastName }}</span>
         </DialogTrigger>
-      </AuthLogin>
+      </ProfileModal>
+
+      <AuthModal v-else>
+        <DialogTrigger>
+          <button
+            @click="globalState.isAuthLogin.value = true"
+            class="hover:text-neutral-600"
+          >
+            Войти
+          </button>
+        </DialogTrigger>
+      </AuthModal>
     </div>
   </header>
 </template>
