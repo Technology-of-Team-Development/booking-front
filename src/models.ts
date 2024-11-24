@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 type User = {
-  fullname: string
+  id: number
+  username: string
   email: string
-  password: string
-}
-
-type MyResponse = {
-  error: boolean
-  message: string
+  firstName: string
+  lastName: string
+  middleName: string
+  avatar: string
+  position: string
+  team: string
 }
 
 type MyReport = {
@@ -19,9 +20,34 @@ type MyReport = {
   date: string
 }
 
-type AvailablePagesNames =
-  | 'map'
-  | 'report'
-  | 'employee'
-  | 'meeting'
-  | 'settings'
+type ErrorResponse = {
+  code: string
+  errorMessage: string
+}
+
+type ViolationError = {
+  violations: { fieldName: string; message: string }[]
+}
+
+type ErrorsResponse = {
+  errors: ErrorResponse[]
+}
+
+type Place = {
+  placeId: number
+  placeCode: string
+  booking: {
+    id: number
+    bookingDate: string
+    employee: User
+    placeCode: string
+  } | null
+  isLocked: boolean
+  hasSchedule: boolean
+}
+
+type Desk = {
+  vertical?: boolean
+  places: Place[]
+  maxPlaces: number
+}
